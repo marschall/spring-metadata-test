@@ -14,12 +14,12 @@ public class DAOGenerator {
 
   public static void main(String[] args) throws IOException {
     Path outputFolder = Paths.get("src/main/java/com/github/marschall/springmetadatatest/generated");
-//    for (int i = 1; i < 1000; i++) {
-//      generateDao(outputFolder, i);
-//    }
+    for (int i = 1; i < 1000; i++) {
+      generateDao(outputFolder, i);
+    }
     generateConfiguration(outputFolder, 0, 1000);
-//    generateInitializerWithBeanDefinition(outputFolder, 0, 1000);
-//    generateInitializerWithSupplier(outputFolder, 0, 1000);
+    generateInitializerWithBeanDefinition(outputFolder, 0, 1000);
+    generateInitializerWithSupplier(outputFolder, 0, 1000);
   }
   
   private static void generateDao(Path folder, int index) throws IOException {
@@ -76,7 +76,27 @@ public class DAOGenerator {
     String fileName = className + ".java";
     Path sourceFile = folder.resolve(fileName);
     try (Writer writer = Files.newBufferedWriter(sourceFile, US_ASCII, CREATE, TRUNCATE_EXISTING)) {
-      
+      writer.append("package com.github.marschall.springmetadatatest.generated;\n");
+      writer.append("\n");
+      writer.append("import java.util.function.Supplier;\n");
+      writer.append("\n");
+      writer.append("import com.github.marschall.springmetadatatest.AbstractDAO;\n");
+      writer.append("\n");
+      writer.append("//@Configuration\n");
+      writer.append("public final class ").append(className).append(" {\n");
+      writer.append("\n");
+      writer.append("  void initialize() {\n");
+      for (int i = start; i < end; i++) {
+        String beanClassName = generateName(i);
+        writer.append("    registerBeanDefinition(").append(beanClassName).append(".class, () -> new ").append(beanClassName).append("(null));\n");
+      }
+      writer.append("  }\n");
+      writer.append("\n");
+      writer.append("  private static <T extends AbstractDAO> void registerBeanDefinition(Class<T> daoClass, Supplier<T> supplier) {\n");
+      writer.append("  }\n");
+      writer.append("\n");
+      writer.append("}\n");
+      writer.append("\n");
     }
   }
   
@@ -85,7 +105,25 @@ public class DAOGenerator {
     String fileName = className + ".java";
     Path sourceFile = folder.resolve(fileName);
     try (Writer writer = Files.newBufferedWriter(sourceFile, US_ASCII, CREATE, TRUNCATE_EXISTING)) {
-      
+      writer.append("package com.github.marschall.springmetadatatest.generated;\n");
+      writer.append("\n");
+      writer.append("import com.github.marschall.springmetadatatest.AbstractDAO;\n");
+      writer.append("\n");
+      writer.append("//@Configuration\n");
+      writer.append("public final class ").append(className).append(" {\n");
+      writer.append("\n");
+      writer.append("  void initialize() {\n");
+      for (int i = start; i < end; i++) {
+        String beanClassName = generateName(i);
+        writer.append("    registerBeanDefinition(").append(beanClassName).append(".class);\n");
+      }
+      writer.append("  }\n");
+      writer.append("\n");
+      writer.append("  private static void registerBeanDefinition(Class<? extends AbstractDAO> daoClass) {\n");
+      writer.append("  }\n");
+      writer.append("\n");
+      writer.append("}\n");
+      writer.append("\n");
     }
   }
   
