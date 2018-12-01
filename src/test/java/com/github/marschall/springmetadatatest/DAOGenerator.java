@@ -15,7 +15,7 @@ public class DAOGenerator {
 
   public static void main(String[] args) throws IOException {
     Path outputFolder = Paths.get("src/main/java/com/github/marschall/springmetadatatest/generated");
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 1; i < 1000; i++) {
       generateDao(outputFolder, i);
     }
   }
@@ -25,16 +25,16 @@ public class DAOGenerator {
     String fileName = className + ".java";
     Path sourceFile = folder.resolve(fileName);
     try (Writer writer = Files.newBufferedWriter(sourceFile, US_ASCII, CREATE, TRUNCATE_EXISTING)) {
-      writer.append("package com.github.marschall.springmetadatatest;\n");
+      writer.append("package com.github.marschall.springmetadatatest.generated;\n");
       writer.append("\n");
-      writer.append("import com.github.marschall.springmetadatatest.AbstractDAO;");
+      writer.append("import com.github.marschall.springmetadatatest.AbstractDAO;\n");
       writer.append("\n");
       writer.append("//@Repository\n");
       writer.append("//@Generated\n");
       writer.append("public final class ").append(className).append(" extends AbstractDAO {\n");
       writer.append("\n");
       writer.append("  //@Autowired\n");
-      writer.append("  public \").append(className).append(\"(Object jdbcTemplate) {\n");
+      writer.append("  public ").append(className).append("(Object jdbcTemplate) {\n");
       writer.append("    super(jdbcTemplate);\n");
       writer.append("  }\n");
       writer.append("\n");
