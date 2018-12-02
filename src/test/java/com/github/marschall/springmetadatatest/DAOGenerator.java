@@ -26,8 +26,8 @@ public class DAOGenerator {
 //    for (int i = 1; i < 1000; i++) {
 //      generateDao(outputFolder, i);
 //    }
-//    generateConfiguration(outputFolder, 0, 1000);
-    generateInitializerWithBeanDefinition(outputFolder, 0, 1000);
+    generateConfiguration(outputFolder, 0, 1000);
+//    generateInitializerWithBeanDefinition(outputFolder, 0, 1000);
 //    generateInitializerWithSupplier(outputFolder, 0, 1000);
   }
   

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcOperations;
 
 @Configuration
-public final class GeneratedConfiguration {
+public class GeneratedConfiguration {
 
   @Autowired
   private JdbcOperations jdbcTemplate;
