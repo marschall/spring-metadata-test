@@ -10,6 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.jdbc.core.JdbcOperations;
@@ -24,8 +27,8 @@ public class DAOGenerator {
 //      generateDao(outputFolder, i);
 //    }
 //    generateConfiguration(outputFolder, 0, 1000);
-//    generateInitializerWithBeanDefinition(outputFolder, 0, 1000);
-    generateInitializerWithSupplier(outputFolder, 0, 1000);
+    generateInitializerWithBeanDefinition(outputFolder, 0, 1000);
+//    generateInitializerWithSupplier(outputFolder, 0, 1000);
   }
   
   private static void generateDao(Path folder, int index) throws IOException {
@@ -69,7 +72,7 @@ public class DAOGenerator {
       writer.append("import org.springframework.jdbc.core.JdbcOperations;\n");
       writer.append("\n");
       writer.append("@Configuration\n");
-      writer.append("public final class ").append(className).append(" {\n");
+      writer.append("public class ").append(className).append(" {\n");
       writer.append("\n");
       writer.append("  @Autowired\n");
       writer.append("  private JdbcOperations jdbcTemplate;\n");
@@ -114,25 +117,37 @@ public class DAOGenerator {
   }
   
   private static void generateInitializerWithBeanDefinition(Path folder, int start, int end) throws IOException {
-    String className = "InitializerWithBeanDefinition";
+    String className = "GeneratedInitializerWithBeanDefinition";
     String fileName = className + ".java";
     Path sourceFile = folder.resolve(fileName);
     try (Writer writer = Files.newBufferedWriter(sourceFile, US_ASCII, CREATE, TRUNCATE_EXISTING)) {
       writer.append("package com.github.marschall.springmetadatatest.generated;\n");
       writer.append("\n");
+      writer.append("import org.springframework.beans.factory.config.BeanDefinition;\n");
+      writer.append("import org.springframework.beans.factory.support.AbstractBeanDefinition;\n");
+      writer.append("import org.springframework.beans.factory.support.BeanDefinitionBuilder;\n");
+      writer.append("import org.springframework.context.ApplicationContextInitializer;\n");
+      writer.append("import org.springframework.context.support.GenericApplicationContext;\n");
+      writer.append("\n");
       writer.append("import com.github.marschall.springmetadatatest.AbstractDAO;\n");
       writer.append("\n");
-      writer.append("//@Configuration\n");
-      writer.append("public final class ").append(className).append(" {\n");
+      writer.append("public final class ").append(className).append(" implements ApplicationContextInitializer<GenericApplicationContext> {\n");
       writer.append("\n");
-      writer.append("  void initialize() {\n");
+      writer.append("  @Override\n");
+      writer.append("  public void initialize(GenericApplicationContext applicationContext) {\n");
       for (int i = start; i < end; i++) {
         String beanClassName = generateName(i);
-        writer.append("    registerBeanDefinition(").append(beanClassName).append(".class);\n");
+        writer.append("    registerBeanDefinition(").append(beanClassName).append(".class, applicationContext);\n");
       }
       writer.append("  }\n");
       writer.append("\n");
-      writer.append("  private static void registerBeanDefinition(Class<? extends AbstractDAO> daoClass) {\n");
+      writer.append("  private static void registerBeanDefinition(Class<? extends AbstractDAO> daoClass, GenericApplicationContext applicationContext) {\n");
+      writer.append("    AbstractBeanDefinition beanDefinition = BeanDefinitionBuilder.genericBeanDefinition(daoClass)\n");
+      writer.append("      .setScope(BeanDefinition.SCOPE_SINGLETON)\n");
+      writer.append("      .setLazyInit(false)\n");
+      writer.append("      .setAutowireMode(AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR)\n");
+      writer.append("      .getBeanDefinition();\n");
+      writer.append("    applicationContext.registerBeanDefinition(daoClass.getSimpleName(), beanDefinition);\n");
       writer.append("  }\n");
       writer.append("\n");
       writer.append("}\n");
