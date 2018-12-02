@@ -14,12 +14,12 @@ public class DAOGenerator {
 
   public static void main(String[] args) throws IOException {
     Path outputFolder = Paths.get("src/main/java/com/github/marschall/springmetadatatest/generated");
-    for (int i = 1; i < 1000; i++) {
-      generateDao(outputFolder, i);
-    }
+//    for (int i = 1; i < 1000; i++) {
+//      generateDao(outputFolder, i);
+//    }
     generateConfiguration(outputFolder, 0, 1000);
-    generateInitializerWithBeanDefinition(outputFolder, 0, 1000);
-    generateInitializerWithSupplier(outputFolder, 0, 1000);
+//    generateInitializerWithBeanDefinition(outputFolder, 0, 1000);
+//    generateInitializerWithSupplier(outputFolder, 0, 1000);
   }
   
   private static void generateDao(Path folder, int index) throws IOException {
@@ -29,14 +29,19 @@ public class DAOGenerator {
     try (Writer writer = Files.newBufferedWriter(sourceFile, US_ASCII, CREATE, TRUNCATE_EXISTING)) {
       writer.append("package com.github.marschall.springmetadatatest.generated;\n");
       writer.append("\n");
+      writer.append("import org.springframework.beans.factory.annotation.Autowired;\n");
+      writer.append("import org.springframework.jdbc.core.JdbcOperations;\n");
+      writer.append("import org.springframework.stereotype.Repository;\n");
+      writer.append("import javax.annotation.Generated;\n");
+      writer.append("\n");
       writer.append("import com.github.marschall.springmetadatatest.AbstractDAO;\n");
       writer.append("\n");
-      writer.append("//@Repository\n");
-      writer.append("//@Generated\n");
+      writer.append("@Repository\n");
+      writer.append("@Generated(\"").append(DAOGenerator.class.getName()).append("\")\n");
       writer.append("public final class ").append(className).append(" extends AbstractDAO {\n");
       writer.append("\n");
-      writer.append("  //@Autowired\n");
-      writer.append("  public ").append(className).append("(Object jdbcTemplate) {\n");
+      writer.append("  @Autowired\n");
+      writer.append("  public ").append(className).append("(JdbcOperations jdbcTemplate) {\n");
       writer.append("    super(jdbcTemplate);\n");
       writer.append("  }\n");
       writer.append("\n");
@@ -52,14 +57,19 @@ public class DAOGenerator {
     try (Writer writer = Files.newBufferedWriter(sourceFile, US_ASCII, CREATE, TRUNCATE_EXISTING)) {
       writer.append("package com.github.marschall.springmetadatatest.generated;\n");
       writer.append("\n");
-      writer.append("//@Configuration\n");
+      writer.append("import org.springframework.beans.factory.annotation.Autowired;\n");
+      writer.append("import org.springframework.context.annotation.Bean;\n");
+      writer.append("import org.springframework.context.annotation.Configuration;\n");
+      writer.append("import org.springframework.jdbc.core.JdbcOperations;\n");
+      writer.append("\n");
+      writer.append("@Configuration\n");
       writer.append("public final class ").append(className).append(" {\n");
       writer.append("\n");
-      writer.append("  //@Autowired\n");
-      writer.append("  private Object jdbcTemplate;\n");
+      writer.append("  @Autowired\n");
+      writer.append("  private JdbcOperations jdbcTemplate;\n");
       writer.append("\n");
       for (int i = start; i < end; i++) {
-        writer.append("  //@Bean\n");
+        writer.append("  @Bean\n");
         String beanClassName = generateName(i);
         writer.append("  public ").append(beanClassName).append(" dao").append(Integer.toString(i)).append("() {\n");
         writer.append("    return new ").append(beanClassName).append("(this.jdbcTemplate);\n");

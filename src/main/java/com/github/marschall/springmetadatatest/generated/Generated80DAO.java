@@ -1,13 +1,18 @@
 package com.github.marschall.springmetadatatest.generated;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.stereotype.Repository;
+import javax.annotation.Generated;
+
 import com.github.marschall.springmetadatatest.AbstractDAO;
 
-//@Repository
-//@Generated
+@Repository
+@Generated("com.github.marschall.springmetadatatest.DAOGenerator")
 public final class Generated80DAO extends AbstractDAO {
 
-  //@Autowired
-  public Generated80DAO(Object jdbcTemplate) {
+  @Autowired
+  public Generated80DAO(JdbcOperations jdbcTemplate) {
     super(jdbcTemplate);
   }
 
