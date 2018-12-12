@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.github.marschall.springmetadatatest.configuration.ComponentScanConfiguration;
+import com.github.marschall.springmetadatatest.configuration.JdbcConfiguration;
 import com.github.marschall.springmetadatatest.generated.configuration.GeneratedConfiguration;
 import com.github.marschall.springmetadatatest.generated.configuration.GeneratedInitializerWithBeanDefinition;
 import com.github.marschall.springmetadatatest.generated.configuration.GeneratedInitializerWithSupplier;
@@ -78,21 +80,21 @@ public class Main {
     return new Application(applicationContext);
   }
 
-  private static ConfigurableApplicationContext getComponentScanApplicationContext() {
+  static ConfigurableApplicationContext getComponentScanApplicationContext() {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
     applicationContext.register(JdbcConfiguration.class, ComponentScanConfiguration.class);
     applicationContext.refresh();
     return applicationContext;
   }
   
-  private static ConfigurableApplicationContext getConfigurationApplicationContext() {
+  static ConfigurableApplicationContext getConfigurationApplicationContext() {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
     applicationContext.register(JdbcConfiguration.class, GeneratedConfiguration.class);
     applicationContext.refresh();
     return applicationContext;
   }
 
-  private static ConfigurableApplicationContext getSupplierApplicationContext() {
+  static ConfigurableApplicationContext getSupplierApplicationContext() {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
     applicationContext.register(JdbcConfiguration.class);
     GeneratedInitializerWithSupplier initializer = new GeneratedInitializerWithSupplier();

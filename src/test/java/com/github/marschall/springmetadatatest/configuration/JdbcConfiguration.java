@@ -1,4 +1,4 @@
-package com.github.marschall.springmetadatatest;
+package com.github.marschall.springmetadatatest.configuration;
 
 import javax.sql.DataSource;
 
