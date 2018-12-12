@@ -22,13 +22,14 @@ import com.github.marschall.springmetadatatest.generated.Generated100DAO;
 public class DAOGenerator {
 
   public static void main(String[] args) throws IOException {
-    Path outputFolder = Paths.get("src/main/java/com/github/marschall/springmetadatatest/generated");
+    Path daoFolder = Paths.get("src/main/java/com/github/marschall/springmetadatatest/generated");
 //    for (int i = 1; i < 1000; i++) {
 //      generateDao(outputFolder, i);
 //    }
-    generateConfiguration(outputFolder, 0, 1000);
-    generateInitializerWithBeanDefinition(outputFolder, 0, 1000);
-    generateInitializerWithSupplier(outputFolder, 0, 1000);
+    Path configurationFolder = Paths.get("src/main/java/com/github/marschall/springmetadatatest/configuration");
+    generateConfiguration(configurationFolder, 0, 1000);
+    generateInitializerWithBeanDefinition(configurationFolder, 0, 1000);
+    generateInitializerWithSupplier(configurationFolder, 0, 1000);
   }
   
   private static void generateDao(Path folder, int index) throws IOException {
@@ -62,9 +63,9 @@ public class DAOGenerator {
   private static void generateConfiguration(Path folder, int start, int end) throws IOException {
     String className = "GeneratedConfiguration";
     String fileName = className + ".java";
-    Path sourceFile = folder.resolve("configuration").resolve(fileName);
+    Path sourceFile = folder.resolve(fileName);
     try (Writer writer = Files.newBufferedWriter(sourceFile, US_ASCII, CREATE, TRUNCATE_EXISTING)) {
-      writer.append("package com.github.marschall.springmetadatatest.generated.configuration;\n");
+      writer.append("package com.github.marschall.springmetadatatest.configuration;\n");
       writer.append("\n");
       writer.append("import org.springframework.beans.factory.annotation.Autowired;\n");
       writer.append("import org.springframework.context.annotation.Bean;\n");
@@ -95,9 +96,9 @@ public class DAOGenerator {
   private static void generateInitializerWithSupplier(Path folder, int start, int end) throws IOException {
     String className = "GeneratedInitializerWithSupplier";
     String fileName = className + ".java";
-    Path sourceFile = folder.resolve("configuration").resolve(fileName);
+    Path sourceFile = folder.resolve(fileName);
     try (Writer writer = Files.newBufferedWriter(sourceFile, US_ASCII, CREATE, TRUNCATE_EXISTING)) {
-      writer.append("package com.github.marschall.springmetadatatest.generated.configuration;\n");
+      writer.append("package com.github.marschall.springmetadatatest.configuration;\n");
       writer.append("\n");
       writer.append("import org.springframework.context.ApplicationContextInitializer;\n");
       writer.append("import org.springframework.context.support.GenericApplicationContext;\n");
@@ -123,9 +124,9 @@ public class DAOGenerator {
   private static void generateInitializerWithBeanDefinition(Path folder, int start, int end) throws IOException {
     String className = "GeneratedInitializerWithBeanDefinition";
     String fileName = className + ".java";
-    Path sourceFile = folder.resolve("configuration").resolve(fileName);
+    Path sourceFile = folder.resolve(fileName);
     try (Writer writer = Files.newBufferedWriter(sourceFile, US_ASCII, CREATE, TRUNCATE_EXISTING)) {
-      writer.append("package com.github.marschall.springmetadatatest.generated.configuration;\n");
+      writer.append("package com.github.marschall.springmetadatatest.configuration;\n");
       writer.append("\n");
       writer.append("import org.springframework.beans.factory.config.BeanDefinition;\n");
       writer.append("import org.springframework.beans.factory.support.AbstractBeanDefinition;\n");

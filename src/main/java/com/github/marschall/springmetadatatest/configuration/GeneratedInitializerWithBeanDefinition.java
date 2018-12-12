@@ -1,4 +1,4 @@
-package com.github.marschall.springmetadatatest.generated.configuration;
+package com.github.marschall.springmetadatatest.configuration;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;

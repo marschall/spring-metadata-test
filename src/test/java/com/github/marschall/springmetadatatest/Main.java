@@ -6,10 +6,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.github.marschall.springmetadatatest.configuration.ComponentScanConfiguration;
+import com.github.marschall.springmetadatatest.configuration.GeneratedConfiguration;
+import com.github.marschall.springmetadatatest.configuration.GeneratedInitializerWithBeanDefinition;
+import com.github.marschall.springmetadatatest.configuration.GeneratedInitializerWithSupplier;
 import com.github.marschall.springmetadatatest.configuration.JdbcConfiguration;
-import com.github.marschall.springmetadatatest.generated.configuration.GeneratedConfiguration;
-import com.github.marschall.springmetadatatest.generated.configuration.GeneratedInitializerWithBeanDefinition;
-import com.github.marschall.springmetadatatest.generated.configuration.GeneratedInitializerWithSupplier;
 
 public class Main {
 

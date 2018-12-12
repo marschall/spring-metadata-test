@@ -1,4 +1,4 @@
-package com.github.marschall.springmetadatatest.generated.configuration;
+package com.github.marschall.springmetadatatest.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

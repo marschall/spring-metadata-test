@@ -1,4 +1,4 @@
-package com.github.marschall.springmetadatatest.generated.configuration;
+package com.github.marschall.springmetadatatest.configuration;
 
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.support.GenericApplicationContext;
