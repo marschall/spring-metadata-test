@@ -1,8 +1,10 @@
-package com.github.marschall.springmetadatatest.generated;
+package com.github.marschall.springmetadatatest.generated.configuration;
 
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.jdbc.core.JdbcOperations;
+
+import com.github.marschall.springmetadatatest.generated.*;
 
 public final class GeneratedInitializerWithSupplier implements ApplicationContextInitializer<GenericApplicationContext> {
 

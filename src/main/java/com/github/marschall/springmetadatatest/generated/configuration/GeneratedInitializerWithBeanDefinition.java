@@ -1,10 +1,12 @@
-package com.github.marschall.springmetadatatest.generated;
+package com.github.marschall.springmetadatatest.generated.configuration;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.support.GenericApplicationContext;
+
+import com.github.marschall.springmetadatatest.generated.*;
 
 import com.github.marschall.springmetadatatest.AbstractDAO;
 

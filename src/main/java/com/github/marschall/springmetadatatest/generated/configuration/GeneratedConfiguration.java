@@ -1,9 +1,11 @@
-package com.github.marschall.springmetadatatest.generated;
+package com.github.marschall.springmetadatatest.generated.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcOperations;
+
+import com.github.marschall.springmetadatatest.generated.*;
 
 @Configuration
 public class GeneratedConfiguration {

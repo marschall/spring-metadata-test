@@ -27,8 +27,8 @@ public class DAOGenerator {
 //      generateDao(outputFolder, i);
 //    }
     generateConfiguration(outputFolder, 0, 1000);
-//    generateInitializerWithBeanDefinition(outputFolder, 0, 1000);
-//    generateInitializerWithSupplier(outputFolder, 0, 1000);
+    generateInitializerWithBeanDefinition(outputFolder, 0, 1000);
+    generateInitializerWithSupplier(outputFolder, 0, 1000);
   }
   
   private static void generateDao(Path folder, int index) throws IOException {
@@ -62,14 +62,16 @@ public class DAOGenerator {
   private static void generateConfiguration(Path folder, int start, int end) throws IOException {
     String className = "GeneratedConfiguration";
     String fileName = className + ".java";
-    Path sourceFile = folder.resolve(fileName);
+    Path sourceFile = folder.resolve("configuration").resolve(fileName);
     try (Writer writer = Files.newBufferedWriter(sourceFile, US_ASCII, CREATE, TRUNCATE_EXISTING)) {
-      writer.append("package com.github.marschall.springmetadatatest.generated;\n");
+      writer.append("package com.github.marschall.springmetadatatest.generated.configuration;\n");
       writer.append("\n");
       writer.append("import org.springframework.beans.factory.annotation.Autowired;\n");
       writer.append("import org.springframework.context.annotation.Bean;\n");
       writer.append("import org.springframework.context.annotation.Configuration;\n");
       writer.append("import org.springframework.jdbc.core.JdbcOperations;\n");
+      writer.append("\n");
+      writer.append("import com.github.marschall.springmetadatatest.generated.*;\n");
       writer.append("\n");
       writer.append("@Configuration\n");
       writer.append("public class ").append(className).append(" {\n");
@@ -93,13 +95,15 @@ public class DAOGenerator {
   private static void generateInitializerWithSupplier(Path folder, int start, int end) throws IOException {
     String className = "GeneratedInitializerWithSupplier";
     String fileName = className + ".java";
-    Path sourceFile = folder.resolve(fileName);
+    Path sourceFile = folder.resolve("configuration").resolve(fileName);
     try (Writer writer = Files.newBufferedWriter(sourceFile, US_ASCII, CREATE, TRUNCATE_EXISTING)) {
-      writer.append("package com.github.marschall.springmetadatatest.generated;\n");
+      writer.append("package com.github.marschall.springmetadatatest.generated.configuration;\n");
       writer.append("\n");
       writer.append("import org.springframework.context.ApplicationContextInitializer;\n");
       writer.append("import org.springframework.context.support.GenericApplicationContext;\n");
       writer.append("import org.springframework.jdbc.core.JdbcOperations;\n");
+      writer.append("\n");
+      writer.append("import com.github.marschall.springmetadatatest.generated.*;\n");
       writer.append("\n");
       writer.append("public final class ").append(className).append(" implements ApplicationContextInitializer<GenericApplicationContext> {\n");
       writer.append("\n");
@@ -119,15 +123,17 @@ public class DAOGenerator {
   private static void generateInitializerWithBeanDefinition(Path folder, int start, int end) throws IOException {
     String className = "GeneratedInitializerWithBeanDefinition";
     String fileName = className + ".java";
-    Path sourceFile = folder.resolve(fileName);
+    Path sourceFile = folder.resolve("configuration").resolve(fileName);
     try (Writer writer = Files.newBufferedWriter(sourceFile, US_ASCII, CREATE, TRUNCATE_EXISTING)) {
-      writer.append("package com.github.marschall.springmetadatatest.generated;\n");
+      writer.append("package com.github.marschall.springmetadatatest.generated.configuration;\n");
       writer.append("\n");
       writer.append("import org.springframework.beans.factory.config.BeanDefinition;\n");
       writer.append("import org.springframework.beans.factory.support.AbstractBeanDefinition;\n");
       writer.append("import org.springframework.beans.factory.support.BeanDefinitionBuilder;\n");
       writer.append("import org.springframework.context.ApplicationContextInitializer;\n");
       writer.append("import org.springframework.context.support.GenericApplicationContext;\n");
+      writer.append("\n");
+      writer.append("import com.github.marschall.springmetadatatest.generated.*;\n");
       writer.append("\n");
       writer.append("import com.github.marschall.springmetadatatest.AbstractDAO;\n");
       writer.append("\n");

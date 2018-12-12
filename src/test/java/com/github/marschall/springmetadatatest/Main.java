@@ -5,9 +5,9 @@ import java.io.IOException;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.github.marschall.springmetadatatest.generated.GeneratedConfiguration;
-import com.github.marschall.springmetadatatest.generated.GeneratedInitializerWithBeanDefinition;
-import com.github.marschall.springmetadatatest.generated.GeneratedInitializerWithSupplier;
+import com.github.marschall.springmetadatatest.generated.configuration.GeneratedConfiguration;
+import com.github.marschall.springmetadatatest.generated.configuration.GeneratedInitializerWithBeanDefinition;
+import com.github.marschall.springmetadatatest.generated.configuration.GeneratedInitializerWithSupplier;
 
 public class Main {
 
