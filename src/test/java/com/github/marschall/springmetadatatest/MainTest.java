@@ -28,5 +28,13 @@ class MainTest {
       application.run();
     }
   }
+  
+  @Test
+  void getBeanDefinitionApplicationContext() {
+    try (ConfigurableApplicationContext applicationContext = Main.getBeanDefinitionApplicationContext();
+        Application application = new Application(applicationContext)) {
+      application.run();
+    }
+  }
 
 }

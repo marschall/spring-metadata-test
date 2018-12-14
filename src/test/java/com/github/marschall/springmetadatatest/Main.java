@@ -103,7 +103,7 @@ public class Main {
     return applicationContext;
   }
 
-  private static ConfigurableApplicationContext getBeanDefinitionApplicationContext() {
+  static ConfigurableApplicationContext getBeanDefinitionApplicationContext() {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
     applicationContext.register(JdbcConfiguration.class);
     GeneratedInitializerWithBeanDefinition initializer = new GeneratedInitializerWithBeanDefinition();
