@@ -42,22 +42,22 @@ public class Main {
 
     try {
       application.run();
-      
+
       switch (executionMode) {
-      case execution_mode_wait:
-        System.in.read();
-      case execution_mode_exit:
-        // nothing
-        break;
-      default:
-        throw new IllegalArgumentException("unknown execution mode: " + executionMode);
+        case execution_mode_wait:
+          System.in.read();
+        case execution_mode_exit:
+          // nothing
+          break;
+        default:
+          throw new IllegalArgumentException("unknown execution mode: " + executionMode);
       }
     } finally {
       application.close();
     }
 
   }
-  
+
   private static Application createApplication(String registrationMode) {
 
     ConfigurableApplicationContext applicationContext;
@@ -86,7 +86,7 @@ public class Main {
     applicationContext.refresh();
     return applicationContext;
   }
-  
+
   static ConfigurableApplicationContext getConfigurationApplicationContext() {
     AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
     applicationContext.register(JdbcConfiguration.class, GeneratedConfiguration.class);
