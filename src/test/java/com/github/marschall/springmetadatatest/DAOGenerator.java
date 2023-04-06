@@ -24,7 +24,7 @@ public class DAOGenerator {
   public static void main(String[] args) throws IOException {
     Path daoFolder = Paths.get("src/main/java/com/github/marschall/springmetadatatest/generated");
 //    for (int i = 1; i < 1000; i++) {
-//      generateDao(outputFolder, i);
+//      generateDao(daoFolder, i);
 //    }
     Path configurationFolder = Paths.get("src/main/java/com/github/marschall/springmetadatatest/configuration");
     generateConfiguration(configurationFolder, 0, 1000);
@@ -42,7 +42,7 @@ public class DAOGenerator {
       writer.append("import org.springframework.beans.factory.annotation.Autowired;\n");
       writer.append("import org.springframework.jdbc.core.JdbcOperations;\n");
       writer.append("import org.springframework.stereotype.Repository;\n");
-      writer.append("import javax.annotation.Generated;\n");
+      writer.append("import jakarta.annotation.Generated;\n");
       writer.append("\n");
       writer.append("import com.github.marschall.springmetadatatest.AbstractDAO;\n");
       writer.append("\n");
