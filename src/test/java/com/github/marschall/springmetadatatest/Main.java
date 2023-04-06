@@ -24,22 +24,19 @@ public class Main {
   public static void main(String[] args) throws IOException {
     if (args.length != 2) {
       System.err.println("usage registration-mode execution-mode");
+      System.exit(1);
     }
     String registrationMode = args[0];
     String executionMode = args[1];
 
-    Application application;
-    switch (registrationMode) {
-      case registration_mode_component_scan:
-      case registration_mode_configuration:
-      case registration_mode_bean_defition:
-      case registration_mode_supplier:
-        application = createApplication(registrationMode);
-        break;
-      default:
-        throw new IllegalArgumentException("unknown registration mode: " + registrationMode);
-    }
-
+    Application application = switch (registrationMode) {
+        case registration_mode_component_scan,
+              registration_mode_configuration,
+              registration_mode_bean_defition,
+              registration_mode_supplier        -> createApplication(registrationMode);
+        default -> throw new IllegalArgumentException("unknown registration mode: " + registrationMode);
+    };
+   
     try {
       application.run();
 
@@ -60,23 +57,13 @@ public class Main {
 
   private static Application createApplication(String registrationMode) {
 
-    ConfigurableApplicationContext applicationContext;
-    switch (registrationMode) {
-      case registration_mode_component_scan:
-        applicationContext = getComponentScanApplicationContext();
-        break;
-      case registration_mode_configuration:
-        applicationContext = getConfigurationApplicationContext();
-        break;
-      case registration_mode_bean_defition:
-        applicationContext = getBeanDefinitionApplicationContext();
-        break;
-      case registration_mode_supplier:
-        applicationContext = getSupplierApplicationContext();
-        break;
-      default:
-        throw new IllegalArgumentException("unknown registration mode: " + registrationMode);
-    }
+    ConfigurableApplicationContext applicationContext = switch (registrationMode) {
+        case registration_mode_component_scan -> getComponentScanApplicationContext();
+        case registration_mode_configuration -> getConfigurationApplicationContext();
+        case registration_mode_bean_defition -> getBeanDefinitionApplicationContext();
+        case registration_mode_supplier -> getSupplierApplicationContext();
+        default -> throw new IllegalArgumentException("unknown registration mode: " + registrationMode);
+    };
     return new Application(applicationContext);
   }
 
